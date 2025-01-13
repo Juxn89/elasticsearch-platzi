@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "671a5f3a-4a98-42a9-a056-aa4f9e794ba7",
+		"name": "Platzi - ElasticSearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6694946"
+	},
+	"item": [
+		{
+			"name": "GET methods",
+			"item": [
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/usuarios/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuarios",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/usuarios/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuarios",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search by ID - without Metadata",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/usuarios/_source/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuarios",
+								"_source",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search by ID - mapping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/usuarios/_mapping",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuarios",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT methods",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"edad\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/usuarios/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuarios",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST methods",
+			"item": [
+				{
+					"name": "Update with POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doc\": {\r\n        \"nombre\": \"Rick\",\r\n        \"apellido\": \"Sánchez\",\r\n        \"edad\": 20\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/usuarios/_update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuarios",
+								"_update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"A borrar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/usuario_falso/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuario_falso",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/usuario_falso/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuario_falso",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete index",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/usuario_falso/",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"usuario_falso",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mapping",
+			"item": [
+				{
+					"name": "New mapping",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mappings\": {\r\n        \"properties\": {\r\n            \"nombre\": { \"type\": \"text\" },\r\n            \"description\": { \"type\": \"text\" },\r\n            \"pedidoUltimaHora\": { \"type\": \"integer\" },\r\n            \"ultimaModificacion\": {\r\n                \"properties\": {\r\n                    \"usuario\": { \"type\": \"text\" },\r\n                    \"fecha\": { \"type\": \"date\" }\r\n                }\r\n             }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update mapping",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"properties\": {\r\n        \"estado\": {  \"type\": \"keyword\" }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_mapping",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new 'Plato' #1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Bowl picante\",\r\n    \"description\": \"Pollo, salsa picante, frijoles, platano, aguacate\",\r\n    \"pedidoUltimaHora\": 42,\r\n    \"ultimaModificacion\": {\r\n        \"usuario\": \"rick@fake.com\",\r\n        \"fecha\": \"2025-01-13\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new 'Plato' #2",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Ensaladadisimo\",\r\n    \"description\": \"Aceitunas, cebolla, queso, tomate, aguacate (saludable)\",\r\n    \"estado\": \"activo\",\r\n    \"pedidoUltimaHora\": 0,\r\n    \"ultimaModificacion\": {\r\n        \"usuario\": \"rick_2@fake.com\",\r\n        \"fecha\": \"2025-01-12\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Elasticsearch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200",
+					"host": [
+						"localhost"
+					],
+					"port": "9200"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Rick\",\r\n    \"apellido\": \"Sanchez\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/usuarios/_doc/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"usuarios",
+						"_doc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Rick\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/usuarios/_doc?refresh",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"usuarios",
+						"_doc"
+					],
+					"query": [
+						{
+							"key": "refresh",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/gomezj01/source/elasticsearch-platzi/usuarios.json"
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/usuarios/_bulk",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"usuarios",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
