@@ -299,7 +299,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Bowl picante\",\r\n    \"description\": \"Pollo, salsa picante, frijoles, platano, aguacate\",\r\n    \"pedidoUltimaHora\": 42,\r\n    \"ultimaModificacion\": {\r\n        \"usuario\": \"rick@fake.com\",\r\n        \"fecha\": \"2025-01-13\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Bowl picante\",\r\n    \"description\": \"Pollo, salsa picante, frijoles, platano, aguacate\",\r\n    \"estado\": \"activo\",\r\n    \"pedidoUltimaHora\": 42,\r\n    \"ultimaModificacion\": {\r\n        \"usuario\": \"rick@fake.com\",\r\n        \"fecha\": \"2025-01-13\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -336,7 +336,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9200/platos/_doc/1",
+							"raw": "localhost:9200/platos/_doc/2",
 							"host": [
 								"localhost"
 							],
@@ -344,7 +344,7 @@
 							"path": [
 								"platos",
 								"_doc",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -381,7 +381,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Nacho XL\",\r\n    \"description\": \"Nachos con carne, guacamole, pico de gallo, queso y salsa picante\",\r\n    \"estado\": \"Activo\",\r\n    \"pedidoUltimaHora\": 11,\r\n    \"ultimaModificacion\": {\r\n        \"usuario\": \"rick_3@fake.com\",\r\n        \"fecha\": \"2025-01-02\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Nacho XL\",\r\n    \"description\": \"Nachos con carne, guacamole, pico de gallo, queso y salsa picante\",\r\n    \"estado\": \"activo\",\r\n    \"pedidoUltimaHora\": 11,\r\n    \"ultimaModificacion\": {\r\n        \"usuario\": \"rick_3@fake.com\",\r\n        \"fecha\": \"2025-01-02\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -553,6 +553,123 @@
 							"path": [
 								"platos",
 								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Boolean queries",
+			"item": [
+				{
+					"name": "Search with boolean queries",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": {\r\n                \"match\": { \"description\": \"picante\" }\r\n            },\r\n            \"filter\": {  \r\n                \"term\": { \"estado\": \"activo\" }\r\n            },\r\n            \"must_not\": {\r\n                \"term\": { \"pedidoUltimaHora\": 0 }\r\n            },\r\n            \"should\": [\r\n                { \"match\": { \"description\": \"aguacate\" } },\r\n                { \"match\": { \"description\": \"guacamole\" } }\r\n            ],\r\n            \"minimum_should_match\": 1\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search with boolean queries #2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                { \"match\": { \"description\": \"picante\" } },\r\n                { \"term\": { \"estado\": \"activo\" } }\r\n            ],\r\n            \"must_not\": {\r\n                \"term\": { \"pedidoUltimaHora\": 0 }\r\n            },\r\n            \"should\": [\r\n                { \"match\": { \"description\": \"aguacate\" } },\r\n                { \"match\": { \"description\": \"guacamole\" } }\r\n            ],\r\n            \"minimum_should_match\": 1\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search with boolean queries #3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                { \"match\": { \"description\": \"picante\" } },\r\n                { \"term\": { \"estado\": \"activo\" } }\r\n            ],\r\n            \"must_not\": {\r\n                \"term\": { \"pedidoUltimaHora\": 0 }\r\n            },\r\n            \"should\": [\r\n                { \"match\": { \"description\": \"aguacate\" } },\r\n                { \"match\": { \"description\": \"guacamole\" } },\r\n                { \"match\": { \"description\": \"pico de gallo\" } }\r\n            ],\r\n            \"minimum_should_match\": 2\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all \"Platos\"",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/platos/",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								""
 							]
 						}
 					},
