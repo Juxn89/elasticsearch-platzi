@@ -678,6 +678,42 @@
 			]
 		},
 		{
+			"name": "Compound query",
+			"item": [
+				{
+					"name": "Compound query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                {\r\n                    \"bool\": {\r\n                        \"should\": [\r\n                            { \"term\": { \"estado\": \"activo\" } },\r\n                            { \"term\": { \"estado\": \"pendiente\" } }\r\n                        ]\r\n                    }\r\n                },\r\n                {\r\n                    \"bool\": {\r\n                        \"should\": [\r\n                            { \"match\": { \"ultimaModificacion.usuario\": \"fake.com\" } },\r\n                            { \"match\": { \"ultimaModificacion.usuario\": \"rick_3\" } }\r\n                        ]\r\n                    }\r\n                },\r\n                {\r\n                    \"term\": { \"pedidoUltimaHora\": 0 }\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Elasticsearch",
 			"request": {
 				"method": "GET",
