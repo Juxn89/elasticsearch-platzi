@@ -353,6 +353,214 @@
 			]
 		},
 		{
+			"name": "Score",
+			"item": [
+				{
+					"name": "Search \"Plato\" all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a \"Plato\" #3",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Nacho XL\",\r\n    \"description\": \"Nachos con carne, guacamole, pico de gallo, queso y salsa picante\",\r\n    \"estado\": \"Activo\",\r\n    \"pedidoUltimaHora\": 11,\r\n    \"ultimaModificacion\": {\r\n        \"usuario\": \"rick_3@fake.com\",\r\n        \"fecha\": \"2025-01-02\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_doc/3",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_doc",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search - simple_query_string",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"simple_query_string\": { \"query\": \"nachos con queso\" }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search - simple_query_string #2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"simple_query_string\": { \"query\": \"bowl pollo saludable\" }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search - simple_query_string #3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"simple_query_string\": { \"query\": \"guacamole picante\" }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search - simple_query_string - set priority an specific field #1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"simple_query_string\": { \r\n            \"query\": \"guacamole picante\",\r\n            \"fields\": [ \"nombre^2\", \"descripcion\" ]\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search - simple_query_string - set priority an specific field #2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"simple_query_string\": { \r\n            \"query\": \"guacamole picante\",\r\n            \"fields\": [ \"nombre\", \"descripcion^2\" ]\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Elasticsearch",
 			"request": {
 				"method": "GET",
