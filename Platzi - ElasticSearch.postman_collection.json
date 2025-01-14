@@ -946,6 +946,186 @@
 			]
 		},
 		{
+			"name": "Project: Data unification",
+			"item": [
+				{
+					"name": "Get \"Restaurantes\" mapping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/restaurantes/_mapping",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get \"Platos\" mapping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/platos/_mapping",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all \"Platos\"",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/platos/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"platos",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update \"Restaurantes\" mapping",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"properties\": {\r\n        \"calificacion\": { \"type\": \"double\" },\r\n        \"direccion\": { \"type\": \"text\" },\r\n        \"platos\": { \r\n            \"type\": \"nested\",\r\n            \"properties\": {\r\n                \"description\": {\r\n                    \"type\": \"text\"\r\n                },\r\n                \"estado\": {\r\n                    \"type\": \"text\"\r\n                },\r\n                \"nombre\": {\r\n                    \"type\": \"text\"\r\n                },\r\n                \"pedidoUltimaHora\": {\r\n                    \"type\": \"integer\"\r\n                }\r\n            }\r\n        },\r\n        \"ultimaModificacion\": {\r\n            \"properties\": { \r\n                \"fecha\": { \"type\": \"date\" },\r\n                \"usuario\": { \"type\": \"text\" }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_mapping",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update \"Restaurante\" #1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doc\": {\r\n    \"calificacion\": 4.22,\r\n    \"direccion\": \"Calle Primera, Barrio Centro\",\r\n    \"platos\": [\r\n      {\r\n        \"nombre\": \"Bowl Picante\",\r\n        \"descripcion\": \"Pollo, salsa picante, frijoles negros, plátano maduro y aguacate.\",\r\n        \"estado\": \"activo\",\r\n        \"pedidosUltimaHora\": 42\r\n      }\r\n    ],\r\n    \"ultimaModificacion\": {\r\n      \"usuario\": \"rick@mail.com\",\r\n      \"fecha\": \"2020-02-19\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update \"Restaurante\" #2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doc\": {\r\n    \"calificacion\": 3.75,\r\n    \"direccion\": \"Carrera Segunda, Barrio Occidental\",\r\n    \"platos\": [\r\n      {\r\n        \"nombre\": \"Nachos XL\",\r\n        \"descripcion\": \"Nachos con carne moplida, guacamole, pico de gallo, salsa picante, queso chedar y frijoles negros\",\r\n        \"estado\": \"activo\",\r\n        \"pedidosUltimaHora\": 11\r\n      }\r\n    ],\r\n    \"ultimaModificacion\": {\r\n      \"usuario\": \"jerry@mail.com\",\r\n      \"fecha\": \"2020-03-01\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_doc/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_doc",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update \"Restaurante\" #3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doc\": {\r\n    \"direccion\": \"Carrera Tercera, Barrio Norte\",\r\n    \"platos\": [\r\n      {\r\n        \"nombre\": \"Ensaladísima\",\r\n        \"descripcion\": \"Aceitunas, cebolla, queso, pimentón, tomate cherry, aguacate. (vegetariano y saludable)\",\r\n        \"estado\": \"activo\",\r\n        \"pedidosUltimaHora\": 0\r\n      }\r\n    ],\r\n    \"ultimaModificacion\": {\r\n      \"usuario\": \"rick@mail.com\",\r\n      \"fecha\": \"2020-01-22\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_doc/3",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_doc",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Elasticsearch",
 			"request": {
 				"method": "GET",
