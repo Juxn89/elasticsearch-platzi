@@ -1,4 +1,17 @@
 # ElasticSearh
+## References
+- [Run ElasticSearch](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-03-poner-a-correr-elasticsearch)
+- [Indexes and documents](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-04-indices-y-documentos)
+- [HTPP verbs](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-05-verbos-http)
+- [Data mapping](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-06-mapeo-de-datos)
+- [Score](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-07-puntaje)
+- [Boolean queries](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-09-consultas-booleanas)
+- [Compound query](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-11-construyendo-una-consulta-compuesta)
+- [Nested queries](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-12-consultas-anidadas)
+- [Data unification](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-13-unificacion-de-datos)
+- [Range and aggregation queries](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-14-consultas-de-rango-y-agregaciones)
+- [Final review of the project](https://github.com/krsarmiento/contenido-curso-elastic/tree/clase-15-revision-final-del-directorio)
+
 ## Set up 
 1. Make sure to install [Docker](https://www.docker.com/products/docker-desktop/) in your local environment.
 2. Run the following command: ```docker-compose up```
