@@ -714,6 +714,238 @@
 			]
 		},
 		{
+			"name": "Nested queries",
+			"item": [
+				{
+					"name": "\"Restaurante\" category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mappings\": {\r\n        \"properties\": {\r\n            \"nombre\": { \"type\": \"text\" },\r\n            \"categories\": {\r\n                \"type\": \"nested\",\r\n                \"properties\": {\r\n                    \"nombre\": { \"type\": \"keyword\" },\r\n                    \"principal\": { \"type\": \"boolean\" }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New \"Restaurante\" #1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"McDonalds\",\r\n    \"categories\": [\r\n        { \"nombre\": \"Comida rápida\", \"principal\": true },\r\n        { \"nombre\": \"Desayunos\", \"principal\": false },\r\n        { \"nombre\": \"Hamburguesas\", \"principal\": false }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_doc/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_doc",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New \"Restaurante\" #2",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Burguer King\",\r\n    \"categories\": [\r\n        { \"nombre\": \"Comida rápida\", \"principal\": false },\r\n        { \"nombre\": \"Hamburguesas\", \"principal\": true }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_doc/2",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_doc",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New \"Restaurante\" #3",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Subway\",\r\n    \"categories\": [\r\n        { \"nombre\": \"Comida saludable\", \"principal\": false },\r\n        { \"nombre\": \"Sandwiches\", \"principal\": true }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_doc/3",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_doc",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all \"Restaurantes\"",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nested search #1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"nested\": {\r\n            \"path\": \"categories\",\r\n            \"query\": {\r\n                \"bool\": {\r\n                    \"must\": {\r\n                        \"term\": { \"categories.nombre\": \"Comida saludable\" }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nested search #2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"nested\": {\r\n            \"path\": \"categories\",\r\n            \"query\": {\r\n                \"bool\": {\r\n                    \"must\": {\r\n                        \"term\": { \"categories.nombre\": \"Comida rápida\" }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nested search #3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"nested\": {\r\n            \"path\": \"categories\",\r\n            \"query\": {\r\n                \"bool\": {\r\n                    \"must\": [\r\n                        { \"term\": { \"categories.nombre\": \"Comida rápida\" } },\r\n                        { \"term\": { \"categories.principal\": true } }\r\n                    ]\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Elasticsearch",
 			"request": {
 				"method": "GET",
