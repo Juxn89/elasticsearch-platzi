@@ -1006,6 +1006,25 @@
 					"response": []
 				},
 				{
+					"name": "Get all \"Restaurantes\"",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update \"Restaurantes\" mapping",
 					"request": {
 						"auth": {
@@ -1118,6 +1137,130 @@
 								"restaurantes",
 								"_doc",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Range and aggregations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"_source\": [\"nombre\", \"calificacion\"],\r\n  \"query\": {\r\n    \"range\": {\r\n      \"calificacion\": {\r\n        \"gt\": 3.5,\r\n        \"lte\": 4.5\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Range and aggregations by date",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"_source\": [\"nombre\", \"ultimaModificacion.fecha\"],\r\n  \"query\": {\r\n    \"range\": {\r\n      \"ultimaModificacion.fecha\": {\r\n        \"gte\": \"2020-01-15\",\r\n        \"lt\": \"2020-03-01\"\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"aggs\" : {\r\n        \"calificacionPromedio\": { \"avg\" : { \"field\" : \"calificacion\" } },\r\n        \"calificacionMaxima\": { \"max\" : { \"field\" : \"calificacion\" } },\r\n        \"calificacionMinima\": { \"min\" : { \"field\" : \"calificacion\" } }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregations #2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"aggs\" : {\r\n        \"calificacionPromedio\" : {\r\n            \"avg\" : {\r\n                \"field\" : \"calificacion\",\r\n                \"missing\": 3.0\r\n            } \r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/restaurantes/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"restaurantes",
+								"_search"
 							]
 						}
 					},
